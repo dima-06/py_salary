@@ -6,8 +6,10 @@
 
 ```bash
 streamlit run main_zav.py
+```
 
 ## Для провізора
 
 ```bash
 streamlit run main_provisor.py
+```
