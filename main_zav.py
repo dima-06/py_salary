@@ -4,12 +4,15 @@ from parts_of_salary.parts_of_zav import PartsOfSalary
 st.title("Калькулятор зарплати завідувача")
 
 hours = st.number_input('Години', min_value=0)
-plan_3 = st.number_input('Виконання плану 3 (%)', min_value=0.0)
-etm = st.number_input('Виконання ВТМ (%)', min_value=0.0)
+plan_3 = st.number_input('Виконання плану 3 (%)', min_value=0)
+etm = st.number_input('Виконання ВТМ (%)', min_value=0)
 gold = st.number_input('Голди', min_value=0)
 overall_goal = st.number_input('Загальна ціль', min_value=0)
 profit = st.number_input('Виторг аптеки', min_value=0)
-other = st.number_input('Інше (інвентаризація, стажування...)', min_value=0)
+other = st.number_input('Інше (стажування, заміна завідувача)', min_value=0)
+invent = st.number_input('Години на інвентаризації', min_value=0)
+termins = st.number_input('Стягнення за терміни', min_value=0)
+holidays = st.number_input('Відпустка', min_value=0)
 
 if st.button("Розрахувати"):
     salary_parts = PartsOfSalary(
@@ -28,6 +31,9 @@ if st.button("Розрахувати"):
         salary_parts.education +
         gold +
         (overall_goal * 1.2) +
+        invent * 128 -
+        termins +
+        holidays +
         other
     )
 
@@ -41,3 +47,4 @@ if st.button("Розрахувати"):
         st.write(f"СТ: {round(salary_parts.rate, 2)} грн")
         st.write(f"ФО: {round(salary_parts.education, 2)} грн")
         st.write(f"Загальна ціль: {round((overall_goal * 1.2), 2)} грн")
+        st.write(f"Інвентаризація: {round((invent * 128), 2)} грн")
